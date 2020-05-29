@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <List v-if="isList" @edit="editItem($event)" @delete="deleteItem($event)" @add="addItem($event)" :items="items"/>
+    <List v-if="isList" @edit-child="editItem($event)" @delete-child="deleteItem($event)" @add-child="addItem($event)" :items="items"/>
     <Detail v-else @datail-event="trueList($event)" :selectedItem="selectedItem" :textarea="selectedTextareaParent" />
   </div>
 </template>

@@ -20,13 +20,13 @@ export default {
   },
   methods: {
     editItem2 (item) {
-      this.$emit('edit', { title2: this.items[this.items.indexOf(item)].title2, index: this.items.indexOf(item) })
+      this.$emit('edit-child', { title2: this.items[this.items.indexOf(item)].title2, index: this.items.indexOf(item) })
     },
     deleteItem2 (item) {
-      this.$emit('delete', this.items.indexOf(item))
+      this.$emit('delete-child', this.items.indexOf(item))
     },
     addItem2 () {
-      this.$emit('add', this.$refs.title)
+      this.$emit('add-child', this.$refs.title)
     }
   } 
 }
