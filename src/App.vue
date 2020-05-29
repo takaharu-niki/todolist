@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <List v-if="isList" @edit="editItem($event)" @delete="deleteItem($event)" @add="addItem($event)" :items="items"/>
-    <Detail v-else @datail-event="trueList($event)" :selectedItem="selectedItem" :textarea="textareaParent[0].text" />
+    <Detail v-else @datail-event="trueList($event)" :selectedItem="selectedItem" :textarea="selectedTextareaParent" />
   </div>
 </template>
 
@@ -26,13 +26,15 @@ export default {
       textareaParent: [
         { text: 'aaaaa'},
         { text: 'bbbbb'}
-      ]
+      ],
+      selectedTextareaParent: '',
+      index: ''
     }
   },
   methods: {
-    trueList (textareaChild) {
-      console.log(textareaChild)
-      // this.textareaParent[0].text = textareaChild 
+    trueList (Child) {
+      this.textareaParent[this.index].text = Child.text 
+      this.items[this.index].title2 = Child.item 
       this.isList = true
     },
     addItem (title) {
@@ -45,11 +47,10 @@ export default {
     deleteItem (index) {
       this.items.splice(index,1)
     },
-    editItem (title2) {
-      this.selectedItem = title2.title2
-      console.log(title2.title2)
-      console.log(title2.index)
-      this.textareaParent[title2.index].text = 
+    editItem (title3) {
+      this.selectedItem = title3.title2
+      this.index = title3.index
+      this.selectedTextareaParent = this.textareaParent[title3.index].text
       this.isList = false
     }
   }

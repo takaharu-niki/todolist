@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    <input type="text" :value="selectedItem">
+    <input type="text" :value="selectedItem" @input="inputItem">
     <textarea :value="textarea" @input="inputText"></textarea>
     <button @click="confirmItem">ok</button>
   </div>
@@ -11,6 +11,7 @@ export default {
   name: 'Detail',
   data: function () {
     return {
+      itemChild: '',
       textareaChild: ''
     }
   },
@@ -22,12 +23,19 @@ export default {
     inputText (event) {
       this.textareaChild = event.target.value
     },
+    inputItem (event) {
+      this.itemChild = event.target.value
+    },
     confirmItem () {
       if (this.textareaChild === "") {
         this.textareaChild = this.textarea
       }
+      if (this.itemChild === "") {
+        this.itemChild = this.selectedItem
+      }
       console.log(this.textareaChild)
-      this.$emit('datail-event', this.textareaChild);
+      console.log(this.itemChild)
+      this.$emit('datail-event', {item: this.itemChild, text: this.textareaChild});
     }
 
   } 
