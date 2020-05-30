@@ -33,8 +33,6 @@ export default {
       if (this.itemChild === "") {
         this.itemChild = this.selectedItem
       }
-      console.log(this.textareaChild)
-      console.log(this.itemChild)
       this.$emit('datail-event', {item: this.itemChild, text: this.textareaChild});
     }
 
