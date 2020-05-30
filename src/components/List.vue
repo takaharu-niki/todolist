@@ -1,12 +1,12 @@
 <template>
   <div class="list">
-    <input @keypress.enter="addItem2" type="text" ref="title">
-    <button @click="addItem2">add</button>
+    <input @keypress.enter="addItem" type="text" ref="title">
+    <button @click="addItem">add</button>
     <div v-for="item in items" :key="item.id">
       <div>
         <input type="text" :value="item.title2" @input="inputItem">
-        <button @click="editItem2(item)">detail</button>
-        <button @click="deleteItem2(item)">delete</button>
+        <button @click="editItem(item)">detail</button>
+        <button @click="deleteItem(item)">delete</button>
       </div>
     </div>
   </div>
@@ -27,16 +27,16 @@ export default {
     inputItem (event) {
       this.itemChild = event.target.value
     },
-    editItem2 (item) {
+    editItem (item) {
       if (!this.itemChild) {
         this.itemChild = this.items[this.items.indexOf(item)].title2
       }
       this.$emit('edit-child', { title2: this.itemChild, index: this.items.indexOf(item) })
     },
-    deleteItem2 (item) {
+    deleteItem (item) {
       this.$emit('delete-child', this.items.indexOf(item))
     },
-    addItem2 () {
+    addItem () {
       this.$emit('add-child', this.$refs.title)
     }
   } 
