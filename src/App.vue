@@ -53,7 +53,7 @@ export default {
       this.selectedTextareaParent = this.textareaParent[title3.index].text
       this.isList = false
     }
-  }
+  },
 }
 </script>
 
