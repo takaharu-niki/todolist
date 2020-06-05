@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <List v-if="isList" @edit-child="editItem($event)" @delete-child="deleteItem($event)" @add-child="addItem($event)" :items="items"/>
+    <List v-if="isList" @edit-child="editItem($event)" @delete-child="deleteItem($event)" :items="items"/>
     <Detail v-else @datail-event="trueList($event)" :selectedItem="selectedItem" :textarea="selectedTextareaParent" />
   </div>
 </template>
@@ -36,13 +36,6 @@ export default {
       this.textareaParent[this.index].text = Child.text 
       this.items[this.index].title2 = Child.item 
       this.isList = true
-    },
-    addItem (title) {
-      if (title.value !== '') {
-        this.items.push({ title2: title.value})
-        title.value = ""
-        title.focus()
-      }
     },
     deleteItem (index) {
       this.items.splice(index,1)
