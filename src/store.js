@@ -8,10 +8,12 @@ const store = new Vuex.Store ({
       { name: 'bbb' },
       { name: 'ccc' }
     ],
+    selectedTodo: "",
     list: true
   },
   getters: {
     todos (state) { return state.todos},
+    selectedTodo (state) { return state.selectedTodo},
     list (state) { return state.list}
   },
   mutations: {
@@ -23,7 +25,12 @@ const store = new Vuex.Store ({
     },
     edit (state, payload) {
       state.list = !state.list
-      console.log(state.list)
+      state.selectedTodo = state.todos[payload].name
+      console.log(state.selectedTodo)
+      console.log(payload)
+    },
+    confirm (state, payload) {
+      state.list = !state.list
       console.log(payload)
     }
   },
@@ -36,6 +43,9 @@ const store = new Vuex.Store ({
     },
     edit ({ commit }, payload) {
       commit ('edit', payload)
+    },
+    confirm ({ commit }, payload) {
+      commit ('confirm', payload)
     }
   },
 
