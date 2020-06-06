@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <List v-if="isList" @edit-child="editItem($event)" @delete-child="deleteItem($event)" :items="items"/>
-    <Detail v-else @datail-event="trueList($event)" :selectedItem="selectedItem" :textarea="selectedTextareaParent" />
+    <!-- <List v-if="isList" @edit-child="editItem($event)" @delete-child="deleteItem($event)" :items="items"/>
+    <Detail v-else @datail-event="trueList($event)" :selectedItem="selectedItem" :textarea="selectedTextareaParent" /> -->
+    <List v-if="list"/>
+    <Detail v-else />
   </div>
 </template>
 
@@ -37,16 +39,19 @@ export default {
       this.items[this.index].title2 = Child.item 
       this.isList = true
     },
-    deleteItem (index) {
-      this.items.splice(index,1)
-    },
-    editItem (title3) {
-      this.selectedItem = title3.title2
-      this.index = title3.index
-      this.selectedTextareaParent = this.textareaParent[title3.index].text
-      this.isList = false
-    }
+    // deleteItem (index) {
+    //   this.items.splice(index,1)
+    // },
+    // editItem (title3) {
+    //   this.selectedItem = title3.title2
+    //   this.index = title3.index
+    //   this.selectedTextareaParent = this.textareaParent[title3.index].text
+    //   this.isList = false
+    // }
   },
+  computed: {
+    list () { return this.$store.getters.list }
+  }
 }
 </script>
 

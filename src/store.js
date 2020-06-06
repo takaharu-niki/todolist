@@ -7,10 +7,12 @@ const store = new Vuex.Store ({
     todos: [
       { name: 'bbb' },
       { name: 'ccc' }
-    ]
+    ],
+    list: true
   },
   getters: {
-    todos (state) { return state.todos}
+    todos (state) { return state.todos},
+    list (state) { return state.list}
   },
   mutations: {
     add (state, payload) {
@@ -18,6 +20,11 @@ const store = new Vuex.Store ({
     },
     delete (state, payload) {
       state.todos.splice (payload, 1)
+    },
+    edit (state, payload) {
+      state.list = !state.list
+      console.log(state.list)
+      console.log(payload)
     }
   },
   actions: {
@@ -26,6 +33,9 @@ const store = new Vuex.Store ({
     },
     delete ({ commit }, payload) {
       commit ('delete', payload)
+    },
+    edit ({ commit }, payload) {
+      commit ('edit', payload)
     }
   },
 
