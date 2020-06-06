@@ -2,7 +2,8 @@
   <div class="detail">
     <input type="text" :value="selectedItem" @input="inputItem">
     <textarea :value="textarea" @input="inputText"></textarea>
-    <button @click="confirmItem">ok</button>
+    <!-- <button @click="confirmItem">ok</button> -->
+    <button @click="confirmTodo">ok</button>
   </div>
 </template>
 
@@ -34,9 +35,14 @@ export default {
         this.itemChild = this.selectedItem
       }
       this.$emit('datail-event', {item: this.itemChild, text: this.textareaChild});
+    },
+    confirmTodo () {
+      this.$store.dispatch ('edit')
     }
-
-  } 
+  },
+  computed: {
+    list () { return this.$store.getters.list }
+  }
 }
 </script>
 
