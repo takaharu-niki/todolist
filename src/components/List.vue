@@ -10,7 +10,7 @@
       </div>
     </div> -->
     <div v-for="todo in todos" :key="todo.id">
-      <input type="text" :value="todo.name">
+      <input type="text" :value="todo.name" ref="refTodo">
       <button @click="editTodo(todo)">detail</button>
       <button @click="deleteTodo(todo)">delete</button>
     </div>
@@ -52,8 +52,8 @@ export default {
       }
     },
     editTodo (todo) {
-      this.$store.dispatch ('edit', this.todos.indexOf(todo))
-    }
+      this.$store.dispatch ('edit', { id: this.todos[this.todos.indexOf(todo)].id, name: this.$refs.refTodo[this.todos.indexOf(todo)].value})
+    },
   },
   computed: {
     todos () { return this.$store.getters.todos },

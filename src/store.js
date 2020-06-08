@@ -5,10 +5,10 @@ Vue.use(Vuex)
 const store = new Vuex.Store ({
   state: {  
     todos: [
-      { name: 'bbb' },
-      { name: 'ccc' }
+      { id: 1, name: 'bbb' },
+      { id: 2, name: 'ccc' }
     ],
-    selectedTodo: "",
+    selectedTodo: { id: "", name: '' },
     list: true
   },
   getters: {
@@ -18,20 +18,22 @@ const store = new Vuex.Store ({
   },
   mutations: {
     add (state, payload) {
-      state.todos.push({ name: payload.payload })
+      state.todos.push({ id: state.todos[state.todos.length - 1].id + 1, name: payload.payload })
     },
     delete (state, payload) {
       state.todos.splice (payload, 1)
     },
     edit (state, payload) {
       state.list = !state.list
-      state.selectedTodo = state.todos[payload].name
-      console.log(state.selectedTodo)
-      console.log(payload)
+      state.selectedTodo = payload
     },
     confirm (state, payload) {
       state.list = !state.list
-      console.log(payload)
+      state.todos.forEach(item => {
+        if (item.id == payload.id) {
+          item.name = payload.name
+        }
+      })
     }
   },
   actions: {
