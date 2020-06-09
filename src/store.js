@@ -5,10 +5,10 @@ Vue.use(Vuex)
 const store = new Vuex.Store ({
   state: {  
     todos: [
-      { id: 1, name: 'bbb' },
-      { id: 2, name: 'ccc' }
+      { id: 1, name: 'bbb', descriptionTodo: 'bbb'},
+      { id: 2, name: 'ccc', descriptionTodo: 'ccc' }
     ],
-    selectedTodo: { id: "", name: '' },
+    selectedTodo: { id: '', name: '', descriptionTodo: '' },
     list: true
   },
   getters: {
@@ -26,12 +26,18 @@ const store = new Vuex.Store ({
     edit (state, payload) {
       state.list = !state.list
       state.selectedTodo = payload
+      state.todos.forEach(item => {
+        if (item.id == payload.id) {
+          state.selectedTodo.descriptionTodo = item.descriptionTodo
+        }
+      })
     },
     confirm (state, payload) {
       state.list = !state.list
       state.todos.forEach(item => {
         if (item.id == payload.id) {
           item.name = payload.name
+          item.descriptionTodo = payload.description
         }
       })
     }
